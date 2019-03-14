@@ -1,6 +1,6 @@
 
 
-实现 JDBC tomcat Pool 的步骤.
+一.实现 JDBC tomcat Pool 的步骤.
 
 1 在 web 项目的 META-INF 中存放 context.xml,在 context.xml 编
 写数据库连接池相关属性
@@ -14,7 +14,7 @@
     maxActive="50"
     maxIdle="20"
     name="test"
-    auth="Container"
+    auth="Container"  交给谁管理 Container 代表tomcat
     maxWait="10000"
     type="javax.sql.DataSource"
     />
@@ -23,3 +23,4 @@
     Context cxt = new InitialContext();
     DataSource ds = (DataSource) cxt.lookup("java:comp/env/test");
     Connection conn = ds.getConnection();
+
