@@ -1,0 +1,25 @@
+
+
+实现 JDBC tomcat Pool 的步骤.
+
+1 在 web 项目的 META-INF 中存放 context.xml,在 context.xml 编
+写数据库连接池相关属性
+    <?xml version="1.0" encoding="UTF-8"?>
+    <Context>
+    <Resource
+    driverClassName="com.mysql.jdbc.Driver"
+    url="jdbc:mysql://localhost:3306/ssm"
+    username="root"
+    password="smallming"
+    maxActive="50"
+    maxIdle="20"
+    name="test"
+    auth="Container"
+    maxWait="10000"
+    type="javax.sql.DataSource"
+    />
+</Context>
+2 把项目发布到 tomcat 中,数据库连接池产生了
+    Context cxt = new InitialContext();
+    DataSource ds = (DataSource) cxt.lookup("java:comp/env/test");
+    Connection conn = ds.getConnection();
